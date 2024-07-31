@@ -9,10 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 public class Rating {
 
-    private String RatingID;
-    private String userID;
-    private String hotelID;
+    private String id;
+    private String userId;
+    private String hotelId;
     private int rating;
     private String feedback;
+    private Hotel hotel;
 
 }

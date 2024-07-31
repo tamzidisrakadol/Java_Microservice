@@ -1,13 +1,28 @@
 package com.example.UserService.Service.impl;
 
+import com.example.UserService.ExternalService.FeignClientHotelService;
+import com.example.UserService.ExternalService.FeignClientRatingService;
 import com.example.UserService.Repository.UserRepository;
 import com.example.UserService.Service.UserService;
+import com.example.UserService.model.Hotel;
+import com.example.UserService.model.Rating;
 import com.example.UserService.model.User;
+
+import ch.qos.logback.classic.Logger;
+
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.Console;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.UUID;
-
+import java.util.stream.Collectors;
 
 
 @Service
@@ -15,6 +30,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    FeignClientRatingService fRatingService;
+
+    @Autowired
+    FeignClientHotelService feignClientHotelService;
 
     @Override
     public User saveUser(User user) {
@@ -25,11 +46,39 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUser() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+
+        //iterate through the list and set the rating by user id
+        for (User user : users){
+            List<Rating> ratings = fRatingService.getAllRatings(user.getUserid());
+
+            //iterate through the rating list to get the hotel info
+            List<Rating> ratingList = ratings.stream().map(rating -> {
+                Hotel hotel = feignClientHotelService.getHotelInfo(rating.getHotelId());
+                rating.setHotel(hotel);
+                return rating;
+            }).toList();
+
+            user.setRatingList(ratingList);
+        }
+
+
+        return users;
     }
 
     @Override
     public User getUserById(String userId) {
-        return userRepository.findById(userId).orElseThrow(()->new RuntimeException("User with given id is not found on server"));
+        //get the userInfo
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User with given id is not found on server"));
+        List<Rating> ratingList = fRatingService.getAllRatings(user.getUserid());
+
+        List<Rating> newRatingList =ratingList.stream().peek(rating -> {
+            Hotel hotel = feignClientHotelService.getHotelInfo(rating.getHotelId());
+            rating.setHotel(hotel);
+        }).toList();
+
+        user.setRatingList(newRatingList);
+
+        return user;
     }
 }
