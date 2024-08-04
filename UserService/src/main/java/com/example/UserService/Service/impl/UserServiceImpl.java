@@ -44,41 +44,48 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    //show all user with rating and hote
     @Override
     public List<User> getAllUser() {
         List<User> users = userRepository.findAll();
 
         //iterate through the list and set the rating by user id
         for (User user : users){
-            List<Rating> ratings = fRatingService.getAllRatings(user.getUserid());
-
-            //iterate through the rating list to get the hotel info
-            List<Rating> ratingList = ratings.stream().map(rating -> {
-                Hotel hotel = feignClientHotelService.getHotelInfo(rating.getHotelId());
-                rating.setHotel(hotel);
-                return rating;
-            }).toList();
-
+            List<Rating> ratingList = getRatingsByUserInfo(user);
             user.setRatingList(ratingList);
         }
-
-
         return users;
     }
 
+    //show user info by User id
     @Override
     public User getUserById(String userId) {
         //get the userInfo
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User with given id is not found on server"));
-        List<Rating> ratingList = fRatingService.getAllRatings(user.getUserid());
+        List<Rating> newRatingList = getRatingsByUserInfo(user);
+        user.setRatingList(newRatingList);
+        return user;
+    }
 
-        List<Rating> newRatingList =ratingList.stream().peek(rating -> {
+    //show the ratings and hotel by user object
+    private List<Rating> getRatingsByUserInfo(User user) {
+        List<Rating> ratingList = fRatingService.getAllRatings(user.getUserid());
+        List<Rating> newRatingList = ratingList.stream().peek(rating -> {
             Hotel hotel = feignClientHotelService.getHotelInfo(rating.getHotelId());
             rating.setHotel(hotel);
         }).toList();
+        return newRatingList;
+    }
 
-        user.setRatingList(newRatingList);
 
+    //set the rating by User id
+    @Override
+    public User setRatingByUserId(String userId,Rating rating) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User with given id is not found on server"));
+        rating.setUserId(userId);
+        fRatingService.setRatingByUserId(rating);
+        List<Rating> existingRatingList = getRatingsByUserInfo(user);
+        user.setRatingList(existingRatingList);
         return user;
     }
 }

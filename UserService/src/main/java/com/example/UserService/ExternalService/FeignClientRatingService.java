@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.UserService.model.Rating;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(value ="HOTEL-RATING",url = "http://localhost:8083")
 public interface FeignClientRatingService {
 
     @GetMapping("/ratings/users/{userId}")
     List<Rating> getAllRatings(@PathVariable("userId") String userId);
+
+    @PostMapping("/ratings")
+    Rating setRatingByUserId(@RequestBody Rating rating);
     
 }

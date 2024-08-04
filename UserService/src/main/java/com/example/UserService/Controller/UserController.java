@@ -2,6 +2,7 @@ package com.example.UserService.Controller;
 
 
 import com.example.UserService.Service.UserService;
+import com.example.UserService.model.Rating;
 import com.example.UserService.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,12 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUser(){
         List<User> userList = userService.getAllUser();
         return ResponseEntity.ok(userList);
+    }
+
+
+    @PostMapping("/setRating/{userId}")
+    public ResponseEntity<User> setRatingByUser(@PathVariable String userId,@RequestBody Rating rating){
+        User user = userService.setRatingByUserId(userId,rating);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 }
