@@ -11,7 +11,7 @@ import com.example.UserService.model.Rating;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value ="HOTEL-RATING",url = "http://localhost:8083")
+@FeignClient(name ="HOTEL-RATING")
 public interface FeignClientRatingService {
 
     @GetMapping("/ratings/users/{userId}")
