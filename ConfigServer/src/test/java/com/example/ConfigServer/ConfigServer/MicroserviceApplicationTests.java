@@ -1,4 +1,4 @@
-package com.example.ConfigServer.Microservice;
+package com.example.ConfigServer.ConfigServer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

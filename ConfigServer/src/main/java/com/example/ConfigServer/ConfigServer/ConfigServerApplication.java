@@ -1,4 +1,4 @@
-package com.example.ConfigServer.Microservice;
+package com.example.ConfigServer.ConfigServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

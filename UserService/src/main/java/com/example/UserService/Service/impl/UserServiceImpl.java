@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    //show all user with rating and hote
+    //show all user with rating and hotel
     @Override
     public List<User> getAllUser() {
         List<User> users = userRepository.findAll();
