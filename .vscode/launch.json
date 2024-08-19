@@ -8,7 +8,8 @@
             "mainClass": "com.example.ServiceRegistery.ServiceRegistery.ServiceRegisteryApplication",
             "projectName": "ServiceRegistery",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7875 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=ServiceRegistery"
         },
         {
             "type": "java",
@@ -18,7 +19,8 @@
             "mainClass": "com.example.rating.hotelRating.HotelRatingApplication",
             "projectName": "hotelRating",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7974 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=hotelRating"
         },
         {
             "type": "java",
@@ -28,7 +30,8 @@
             "mainClass": "com.microservice.hotel.HotelService.HotelServiceApplication",
             "projectName": "HotelService",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8017 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=HotelService"
         },
         {
             "type": "java",
@@ -37,6 +40,27 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.example.UserService.UserServiceApplication",
             "projectName": "UserService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8372 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=UserService"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiGatewayApplication<Api-Gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.apiGateway.Api_Gateway.ApiGatewayApplication",
+            "projectName": "Api-Gateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ConfigServerApplication<Microservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.ConfigServer.ConfigServer.ConfigServerApplication",
+            "projectName": "Microservice",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
