@@ -1,5 +1,6 @@
 package com.example.UserService.Service;
 
+import com.example.UserService.model.Hotel;
 import com.example.UserService.model.Rating;
 import com.example.UserService.model.User;
 
