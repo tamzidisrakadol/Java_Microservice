@@ -7,22 +7,11 @@ import com.example.UserService.Service.UserService;
 import com.example.UserService.model.Hotel;
 import com.example.UserService.model.Rating;
 import com.example.UserService.model.User;
-
-import ch.qos.logback.classic.Logger;
-
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import java.io.Console;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 
 @Service
@@ -77,7 +66,6 @@ public class UserServiceImpl implements UserService {
         return newRatingList;
     }
 
-
     //set the rating by User id
     @Override
     public User setRatingByUserId(String userId,Rating rating) {
@@ -89,3 +77,5 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 }
+
+//TODO : create a hotel model class to show all the hotels and their ratings from user-ms

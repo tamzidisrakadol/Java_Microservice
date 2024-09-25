@@ -1,5 +1,6 @@
 package com.microservice.hotel.HotelService.Service;
 
+import com.microservice.hotel.HotelService.Dto.ReviewMessageQueue;
 import com.microservice.hotel.HotelService.Exception.ResourceNotFoundException;
 import com.microservice.hotel.HotelService.Repositories.HotelRepo;
 import com.microservice.hotel.HotelService.model.Hotel;
@@ -30,5 +31,10 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Hotel getHotelById(String id) {
         return hotelRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("hotel with given id not found"));
+    }
+
+    @Override
+    public void updateCompanyReview(ReviewMessageQueue reviewMessageQueue) {
+        System.out.println(reviewMessageQueue.getFeedback());
     }
 }
