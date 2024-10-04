@@ -20,10 +20,13 @@ public class User {
 
     @Id
     private String userid;
-    private String name;
+    private String fname;
+    private String username;
     private String email;
     private String address;
     private String about;
+    private String password;
+    private String role;
 
     @Transient
     private List<Rating> ratingList;

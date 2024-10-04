@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) {
         String randomUserId = UUID.randomUUID().toString();
         user.setUserid(randomUserId);
+        user.setRole("ROLE_USER");
         return userRepository.save(user);
     }
 

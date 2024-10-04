@@ -61,7 +61,7 @@ public class UserController {
         System.out.println("error Message : "+exception.getMessage());
         User errorUser = User.builder()
         .email("@Gmail.com")
-        .name("dummyName")
+        .fname("dummyName")
         .userid("dummy_ID")
         .address("dummyAddress")
         .build();
